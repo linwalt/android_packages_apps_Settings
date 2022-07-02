@@ -14517,4 +14517,5 @@
     <string name="sandboxed_google_play_work_profile">Sandboxed Google Play (work profile)</string>
     <string name="screenshot_timestamp_exif_title">Save screenshot timestamp to EXIF</string>
     <string name="screenshot_timestamp_exif_summary">Enables adding a timestamp to screenshot EXIF metadata</string>
+    <string name="storage_scopes">Storage Scopes</string>
 </resources>
