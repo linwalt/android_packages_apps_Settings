@@ -14459,5 +14459,8 @@
     <!-- Battery stats reset -->
     <string name="battery_stats_reset">Reset stats?</string>
     <string name="battery_stats_message">Battery usage data will be lost</string>
-    <string name="battery_stats_clear" translatable="false">@string/proxy_clear_text</string>
+    <string name="battery_stats_clear" translatable="false">@string/proxy_clear_text</string>    
+    <!-- fingerprint lockout -->
+    <string name="fingerprint_lockout_title">Disable fingerprint lockout</string>
+    <string name="fingerprint_lockout_summary">Deactivates 30 second timeout as well as permanent lockout after multiple failed fingerprint unlock attempts</string>
 </resources>

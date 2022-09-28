@@ -60,6 +60,13 @@
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_biometric_settings" />
+
+        <com.android.settings.support.SystemSettingSwitchPreference
+            android:key="fingerprint_lockout"
+            android:title="@string/fingerprint_lockout_title"
+            android:summary="@string/fingerprint_lockout_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <Preference
