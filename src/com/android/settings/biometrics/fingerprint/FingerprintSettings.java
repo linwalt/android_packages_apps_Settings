@@ -249,9 +249,7 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                     private void updateDialog() {
-                        if (isSfps() && !mRequireScreenOnToAuth) {
-                            setRequireScreenOnToAuthVisibility();
-                        }
+                        updateFingerprintUnlockCategory();
                         RenameDialog renameDialog = (RenameDialog) getFragmentManager().
                                 findFragmentByTag(RenameDialog.class.getName());
                         if (renameDialog != null) {
@@ -515,8 +513,8 @@ public class FingerprintSettings extends SubSettings {
                         return true;
                     });
             mFingerprintUnlockCategory.setVisible(false);
-            if (isSfps() && !mRequireScreenOnToAuth) {
-                setRequireScreenOnToAuthVisibility();
+            if (isSfps()) {
+                updateFingerprintUnlockCategory();
             }
             setPreferenceScreen(root);
 
@@ -531,18 +529,21 @@ public class FingerprintSettings extends SubSettings {
                         getContext().getContentResolver(),
                         Settings.Secure.BIOMETRIC_KEYGUARD_ENABLED, 1) == 1);
                 lockScreenFingerprintPreference.setOnPreferenceChangeListener(this);
+
+                updateFingerprintUnlockCategory();
             }
 
             return root;
         }
 
-        private void setRequireScreenOnToAuthVisibility() {
+        private void updateFingerprintUnlockCategory() {
             int fingerprintsEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
             final boolean removalInProgress = mRemovalSidecar.inProgress();
             // Removing last remaining fingerprint
             if (fingerprintsEnrolled == 0 && removalInProgress) {
                 mFingerprintUnlockCategory.setVisible(false);
             } else {
+                mRequireScreenOnToAuthPreference.setVisible(isSfps());
                 mFingerprintUnlockCategory.setVisible(true);
             }
         }
