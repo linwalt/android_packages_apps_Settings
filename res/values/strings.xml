@@ -14456,5 +14456,8 @@
     <string name="bt_le_audio_scan_qr_code_scanner">To start listening, center the QR code below</string>
     <!-- [CHAR LIMIT=NONE] Hint for QR code process failure -->
     <string name="bt_le_audio_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
-
+    <!-- Battery stats reset -->
+    <string name="battery_stats_reset">Reset stats?</string>
+    <string name="battery_stats_message">Battery usage data will be lost</string>
+    <string name="battery_stats_clear" translatable="false">@string/proxy_clear_text</string>
 </resources>
