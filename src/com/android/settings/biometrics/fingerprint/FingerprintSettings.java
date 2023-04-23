@@ -41,7 +41,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -154,7 +153,7 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
         private static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
-                "security_settings_fingerprint_keyguard";
+                "fingerprint_enable_keyguard_toggle";
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
         private static final String KEY_HAS_FIRST_ENROLLED = "has_first_enrolled";
         private static final String KEY_IS_ENROLLING = "is_enrolled";
@@ -519,20 +518,6 @@ public class FingerprintSettings extends SubSettings {
                 setRequireScreenOnToAuthVisibility();
             }
             setPreferenceScreen(root);
-
-            // Don't show keyguard preferences for work profile settings.
-            if (UserManager.get(getContext()).isManagedProfile(mUserId)) {
-                removePreference(KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
-            } else {
-                SwitchPreference lockScreenFingerprintPreference =
-                        (SwitchPreference) findPreference(KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
-
-                lockScreenFingerprintPreference.setChecked(Settings.Secure.getInt(
-                        getContext().getContentResolver(),
-                        Settings.Secure.BIOMETRIC_KEYGUARD_ENABLED, 1) == 1);
-                lockScreenFingerprintPreference.setOnPreferenceChangeListener(this);
-            }
-
             return root;
         }
 
@@ -753,10 +738,7 @@ public class FingerprintSettings extends SubSettings {
             boolean result = true;
             final String key = preference.getKey();
             if (KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE.equals(key)) {
-                boolean enableFingerprintUnlock = (boolean) value;
-                Settings.Secure.putInt(getContext().getContentResolver(),
-                        Settings.Secure.BIOMETRIC_KEYGUARD_ENABLED,
-                        (enableFingerprintUnlock) ? 1 : 0);
+                // TODO
             } else {
                 Log.v(TAG, "Unknown key:" + key);
             }
