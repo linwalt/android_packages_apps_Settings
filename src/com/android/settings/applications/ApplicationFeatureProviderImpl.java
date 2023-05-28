@@ -183,6 +183,10 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (mPm.getWellbeingPackageName() != null) {
             keepEnabledPackages.add(mPm.getWellbeingPackageName());
         }
+        // Disabling GmsCompat app breaks the gmscompat layer
+        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME);
+        // Disabling GmsCompatConfig breaks updates through Apps app
+        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME + ".config");
         return keepEnabledPackages;
     }
 
